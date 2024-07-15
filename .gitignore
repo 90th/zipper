@@ -32,3 +32,4 @@
 *.app
 /.vs
 /zipper/x64
+/x64
