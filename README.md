@@ -13,7 +13,10 @@ zipper.exe original.png output.png file1.txt file2.txt ...
 ```
 This will create a ZIP archive containing file1.txt and file2.txt, and append it to original.png, resulting in output.png.
 
+## Dependencies
 
+Zipper relies on the following dependencies:
+- **libzip**: This library is used for creating and manipulating ZIP archives.
 
 ### License
 
