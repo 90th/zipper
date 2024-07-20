@@ -8,7 +8,7 @@ Zipper is a command-line interface (CLI) application that allows you to embed mu
 
 Run the zipper application with the following syntax:
 ```
-zipper.exe original.png output.png file.zip ...
+zipper.exe original.png output.png file.zip
 ```
 Note: The application can append any ZIP-compatible file type, including `.zip`, `.7z`, `.rar`, and others.
 
