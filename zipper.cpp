@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <cstdio>
+#include <filesystem>
 
 class Zipper {
 public:
@@ -30,8 +31,7 @@ public:
 
 private:
 	bool fileExists(const std::string& path) {
-		std::ifstream file(path);
-		return file.good();
+		return std::filesystem::exists(path);
 	}
 
 	bool appendZipToImage(const std::string& imagePath, const std::string& zipFilePath, const std::string& outputFilePath) {
@@ -55,8 +55,18 @@ private:
 				return false;
 			}
 
-			outputFile << imageFile.rdbuf();
-			outputFile << zipFile.rdbuf();
+			std::vector<char> buffer(1024 * 1024); // 1mb
+			while (!imageFile.eof()) {
+				imageFile.read(buffer.data(), buffer.size());
+				std::streamsize size = imageFile.gcount();
+				outputFile.write(buffer.data(), size);
+			}
+
+			while (!zipFile.eof()) {
+				zipFile.read(buffer.data(), buffer.size());
+				std::streamsize size = zipFile.gcount();
+				outputFile.write(buffer.data(), size);
+			}
 		}
 		catch (const std::ios_base::failure& e) {
 			std::cerr << "File operation failed: " << e.what() << std::endl;
